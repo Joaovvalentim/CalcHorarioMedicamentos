@@ -3,7 +3,6 @@ import moment from 'moment';
 import 'moment/locale/pt-br'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
   moment.locale('pt-br');
 
@@ -32,19 +31,6 @@ function App() {
     setMedicationSchedule(scheduleList);
   }
 
-  const calculateMedicationSchedule = () => {
-    const scheduleList = [];
-    let currentDate = moment(startDate);
-    let numDoses = Math.floor(numDays * 24 / numHours);
-    let interval = numHours / numDoses;
-
-    for (let i = 0; i < numDoses; i++) {
-      scheduleList.push(currentDate.format('dddd, D [de] MMMM [às] HH:mm'));
-      currentDate.add(interval, 'hours');
-    }
-
-    return scheduleList;
-  };
 
   return (
     <div className="container mt-5">
@@ -57,6 +43,7 @@ function App() {
             type="number"
             value={numDays}
             onChange={(event) => setNumDays(event.target.value)}
+            min="0"
           />
         </div>
       </div>
@@ -68,6 +55,7 @@ function App() {
             type="number"
             value={numHours}
             onChange={(event) => setNumHours(event.target.value)}
+            min="0"
           />
         </div>
       </div>
